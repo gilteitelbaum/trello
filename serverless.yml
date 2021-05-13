@@ -1,0 +1,89 @@
+# NOTE: update this with your service name
+service: cheq-server-api
+
+# Create an optimized package for our functions 
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-2:*:*"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: eu-south-1
+    # To load environment variables externally
+  # rename env.example to .env and uncomment
+  # the following line. Also, make sure to not
+  # commit your .env.
+  #
+  #environment:
+  #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+
+
+
+functions:
+  create-columns:
+    handler: src/columns/create-columns.main
+    events:
+      - http:
+          path: columns
+          method: post
+          cors: true
+  update-columns:
+    handler: src/columns/update-columns.main
+    events:
+      - http:
+          path: columns/{id}
+          method: put
+          cors: true
+  get-columns:
+    handler: src/columns/get-columns.main
+    events:
+      - http:
+          path: columns/{id}
+          method: get
+          cors: true
+  create-card:
+    handler: src/cards/create-card.main
+    events:
+      - http:
+          path: card
+          method: post
+          cors: true
+  update-card:
+    handler: src/cards/update-card.main
+    events:
+      - http:
+          path: card/{id}
+          method: put
+          cors: true
+  get-card:
+    handler: src/cards/get-card.main
+    events:
+      - http:
+          path: card/{id}
+          method: get                   
+          cors: true
+  delete-card:
+    handler: src/cards/delete-card.main
+    events:
+      - http:
+          path: card/{id}
+          method: delete
+          cors: true

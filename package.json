@@ -1,0 +1,29 @@
+{
+  "name": "cheq-trello",
+  "version": "2.2.0",
+  "description": "A Node.js starter for Serverless Framework with ES6 and TypeScript support",
+  "main": "handler.js",
+  "scripts": {
+    "test": "serverless-bundle test"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnomalyInnovations/serverless-nodejs-starter.git"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.904.0",
+    "eslint": "^7.3.1",
+    "serverless-bundle": "^3.2.0",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^5.3.3"
+  },
+  "dependencies": {
+    "eslint": "^7.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "uuid": "^7.0.3"
+  }
+}
